@@ -21,7 +21,7 @@ def usage():
 	"""Help for the user"""
 	print("""
 		Maybe you should try:
-			> open(myUrl)
+			> urlOpen(myUrl)
 			> listInfos()
 
 
@@ -39,10 +39,14 @@ def usage():
 
 		_____ comprehensive documentation  ____
 		help(MechanizedPython) 
+		h() 			// Do the same thing
 
 		""")
 
-def open(url, data=None, timeout=10):
+def h():
+	help(MechanizedPython)
+
+def urlOpen(url, data=None, timeout=10):
 	"""Open an url with the nav static browser"""
 	res=nav.br.open(url,data,timeout)
 
@@ -67,7 +71,6 @@ def listForms():
 	for form in nav.br.forms():
 		printFormInfo(form,i)
                 i+=1
-		print("Form name : "+str(form.name))
 		print("")
 
 def listControls(form):
@@ -76,12 +79,12 @@ def listControls(form):
 		printControlInfo(control)
 
 def displayForms():
-	"""Display forms infos in a page using the static Browser object, you have to call open(url) first. """
+	"""Display forms infos in a page using the static Browser object, you have to call urlOpen(url) first. """
 	i=0
 	for form in nav.br.forms():
 		printFormInfo(form,i)
+		nav.br.form = list(nav.br.forms())[i]
 		i+=1
-		nav.br.form = list(nav.br.forms())[0]
 		listControls(form)
 		print("")
 
@@ -108,4 +111,6 @@ def listInfos():
 
 if __name__=="__main__":
 	code.interact("Python "+str(sys.version_info.major)+"."+str(sys.version_info.minor)+" is running."+"Try usage() to get some useful information about this interactive script",local=locals())
+
+
 
