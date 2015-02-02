@@ -17,6 +17,29 @@ class nav:
 	"""Local test page"""
 	test="http://127.0.0.1/form.php"
 
+class webForm:
+	def __init__(self,method="POST",name=None):
+		self.method=method
+		self.name=name
+		self.controls=[]
+	def __str__(self):
+		return "Form name : "+str(self.name)+", formMethod : "+str(self.method)+" Inputs :"+str(self.controls)
+	def __repr__(self):	
+		return self.__str__()
+	def addControl(self,Control):
+		self.controls.append(Control)
+
+class webControl:
+	def __init__(self,type="text",name=None,value=None):
+		self.type=type
+		self.name=name
+		self.value=value
+	def __str__(self):
+		return "(Type : "+str(self.type)+") InputName : "+str(self.name)+" Value : "+str(self.value)
+	def __repr__(self):
+                return self.__str__()
+
+
 def usage():
 	"""Help for the user"""
 	print("""
@@ -50,43 +73,44 @@ def urlOpen(url, data=None, timeout=10):
 	"""Open an url with the nav static browser"""
 	res=nav.br.open(url,data,timeout)
 
-
-def printControlInfo(control):
-	""" print the information about a control/input"""
-	print("(Type : "+str(control.type)+") InputName : "+str(control.name))
-	try:
-		print("Value : "+str(nav.br[control.name]))
-	except:
-		pass
 	
 def printFormInfo(form,formIndex=-1):
 	"""Print Form informations"""
 	if formIndex!=-1:
 		print("Code to get the form : "+"list(nav.br.forms())["+str(formIndex)+"]")
-	print("Form name : "+str(form.name)+", formMethod : "+str(form.method))
+	print form
 	
 def listForms():
 	"""List Forms from the visited page"""
 	i=0
+	formList=[]
 	for form in nav.br.forms():
-		printFormInfo(form,i)
+		mForm=webForm(form.method,form.name)
+		formList.append(mForm)
                 i+=1
 		print("")
+	return formList
 
 def listControls(form):
 	"""List Controls/Inputs from the visited page"""
+	ctrlList=[]
 	for control in form.controls:
-		printControlInfo(control)
+		mControl=webControl(control.type,control.name,control.value)
+		ctrlList.append(mControl)
+	return ctrlList
 
 def displayForms():
 	"""Display forms infos in a page using the static Browser object, you have to call urlOpen(url) first. """
 	i=0
+	formList=[]
 	for form in nav.br.forms():
-		printFormInfo(form,i)
+		mForm=webForm(form.method,form.name)
 		nav.br.form = list(nav.br.forms())[i]
+		mForm.controls=listControls(form)
+		formList.append(mForm)
 		i+=1
-		listControls(form)
 		print("")
+	return formList
 
 def listLinks():
 	"""Lists links form the nav.br object (current page)"""
