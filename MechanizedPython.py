@@ -55,7 +55,7 @@ def printControlInfo(control):
 	except:
 		pass
 	
-def _printFormInfo(form,formIndex=-1):
+def printFormInfo(form,formIndex=-1):
 	"""Print Form informations"""
 	if formIndex!=-1:
 		print("Code to get the form : "+"list(nav.br.forms())["+str(formIndex)+"]")
@@ -65,7 +65,7 @@ def listForms():
 	"""List Forms from the visited page"""
 	i=0
 	for form in nav.br.forms():
-		_printFormInfo(form,i)
+		printFormInfo(form,i)
                 i+=1
 		print("Form name : "+str(form.name))
 		print("")
@@ -79,7 +79,7 @@ def displayForms():
 	"""Display forms infos in a page using the static Browser object, you have to call open(url) first. """
 	i=0
 	for form in nav.br.forms():
-		_printFormInfo(form,i)
+		printFormInfo(form,i)
 		i+=1
 		nav.br.form = list(nav.br.forms())[0]
 		listControls(form)
