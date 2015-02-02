@@ -26,6 +26,10 @@ class webForm:
 		return "Form name : "+str(self.name)+", formMethod : "+str(self.method)+" Inputs :"+str(self.controls)
 	def __repr__(self):	
 		return self.__str__()
+	def show(self):
+		print("Form name : "+str(self.name)+", formMethod : "+str(self.method))
+		for webCtrl in self.controls:
+			print("* "+str(webCtrl))
 	def addControl(self,Control):
 		self.controls.append(Control)
 
