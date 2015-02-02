@@ -19,10 +19,16 @@ class nav:
 
 def usage():
 	"""Help for the user"""
-	print("""You could have a look to :
-		help(nav)
-		help(open) 
-		help(listInfos)
+	print("""
+		Maybe you should try:
+			> open(myUrl)
+			> listInfos()
+
+
+		You could have a look to :
+		help(nav) 	// Provide the nav.br mechanize browser
+		help(open) 	// Open an url with the browser
+		help(listInfos)	// List usefull infos
 			help(displayForms)
 			help(listLinks)
 
@@ -32,7 +38,8 @@ def usage():
 		help(printControlInfo)
 
 		_____ comprehensive documentation  ____
-		help(MechanizedPython) for all infos
+		help(MechanizedPython) 
+
 		""")
 
 def open(url, data=None, timeout=10):
@@ -42,7 +49,7 @@ def open(url, data=None, timeout=10):
 
 def printControlInfo(control):
 	""" print the information about a control/input"""
-	print("Type : "+str(control.type)+",InputName : "+str(control.name))
+	print("(Type : "+str(control.type)+") InputName : "+str(control.name))
 	try:
 		print("Value : "+str(nav.br[control.name]))
 	except:
@@ -101,5 +108,4 @@ def listInfos():
 
 if __name__=="__main__":
 	code.interact("Python "+str(sys.version_info.major)+"."+str(sys.version_info.minor)+" is running."+"Try usage() to get some useful information about this interactive script",local=locals())
-
 
