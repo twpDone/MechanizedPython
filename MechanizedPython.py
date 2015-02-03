@@ -18,29 +18,47 @@ class nav:
     test="http://127.0.0.1/form.php"
 
 class webForm:
+    """ Custom Form class
+        Build to store extracted values of a http form """
     def __init__(self,method="POST",name=None):
+        """ Constructor
+            <str> method Method used by the form
+            <str> name Name attribute of the form """
         self.method=method
         self.name=name
         self.controls=[]
     def __str__(self):
+        """ String builder for this class"""
         return "Form name : "+str(self.name)+", formMethod : "+str(self.method)+" Inputs :"+str(self.controls)
     def __repr__(self):	
+        """ Printed when you interact with an instance of this class"""
         return self.__str__()
     def show(self):
+        """ Print a nice description of the form"""
         print("Form name : "+str(self.name)+", formMethod : "+str(self.method))
         for webCtrl in self.controls:
-                print("* "+str(webCtrl))
+            print("* "+str(webCtrl))
     def addControl(self,Control):
+        """ Add a webControl to the controls list member
+            <webControl> Control Instance of a webControl class"""
         self.controls.append(Control)
 
 class webControl:
+    """ Custom Control/Input class
+        Build to store extracted input infos from a http form """
     def __init__(self,type="text",name=None,value=None):
+        """ Constructor
+            <str> type Type used of the input field
+            <str> name Name attribute of the input field 
+            <str> value Value attribute of the input field"""
         self.type=type
         self.name=name
         self.value=value
     def __str__(self):
+        """ String builder for this class"""
         return "(Type : "+str(self.type)+") InputName : "+str(self.name)+" Value : "+str(self.value)
     def __repr__(self):
+        """ Printed when you interact with an instance of this class"""
         return self.__str__()
 
 
@@ -71,6 +89,7 @@ def usage():
         """)
 
 def h():
+    """ Display the help for this script"""
     help(MechanizedPython)
 
 def urlOpen(url, data=None, timeout=10):
@@ -138,6 +157,7 @@ def listInfos():
     listLinks()	
 
 if __name__=="__main__":
+    """ Main code """
     code.interact("Python "+str(sys.version_info.major)+"."+str(sys.version_info.minor)+" is running."+"Try usage() to get some useful information about this interactive script",local=locals())
 
 
